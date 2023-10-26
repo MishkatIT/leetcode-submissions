@@ -13,9 +13,9 @@ public:
     }
 };
 /*
-    To implement this problem's solution, you can use binary exponentiation or the built-in 'pow' function of c++ or equivalent in other languages. 
+    To implement this problem's solution, you can use binary exponentiation or the built-in 'pow' function of C++ or equivalent in other languages. 
     If power is negative then we can break it down like this:
     for example x = 5, n = -3;
     5 ^ -3 can be written as 1 / (5 ^ 3). 
-    simply, calculate pow (x, 3) then divide 1 by the result. 
+    simply calculate pow (5, 3) then divide 1 by the result. 
 */
