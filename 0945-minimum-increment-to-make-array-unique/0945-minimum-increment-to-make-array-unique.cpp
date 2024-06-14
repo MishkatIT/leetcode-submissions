@@ -1,25 +1,20 @@
 class Solution {
 public:
     int minIncrementForUnique(vector<int>& nums) {
-        map<int, int> mp;
+        vector<int> f(1e5 + 5);
         for (auto& i : nums) {
-            mp[i]++;
+            f[i]++;
         }
-        long long sum = -1;
         long long ans = 0;
-        for (auto& i : mp) {
-            if (sum < i.first) {
-                long long x = i.second - 1;
-                ans += x * (x + 1) / 2;
-                sum = i.first + x;
-            } else {
-                long long x = i.second - 1;
-                ans += (sum - i.first + 1) * i.second;
-                ans += x * (x + 1) / 2;
-                sum += i.second;
+        for (int i = 0; i <= 1e5; i++) {
+            if (f[i] > 1) {
+                ans += f[i] - 1;
+                f[i + 1] += f[i] - 1;
             }
-
         }
+        long long x = f[1e5 + 1];
+        x--;
+        ans += x * (x + 1) / 2;
         return ans;
     }
 };
