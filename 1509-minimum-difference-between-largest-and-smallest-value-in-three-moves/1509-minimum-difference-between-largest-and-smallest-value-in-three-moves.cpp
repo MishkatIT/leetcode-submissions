@@ -4,10 +4,10 @@ public:
         int n = v.size();
         if (n <= 4) return 0;
         sort(v.begin(), v.end());
-        int ans = v.back() - v[3];
-        ans = min(ans, v[n - 4] - v.front());
-        ans = min(ans, v[n - 3] - v[1]);
-        ans = min(ans, v[n - 2] - v[2]);
+        int ans = INT_MAX;
+        for (int i = 0; i <= 3; ++i) {
+            ans = min(ans, v[n - 4 + i] - v[i]);
+        }
         return ans;
     }
 };
