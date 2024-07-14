@@ -14,7 +14,7 @@ public:
         return ans;
     }
 
-        map<string, int> func (string &str, int& i) {
+    map<string, int> func(string& str, int& i) {
         map<string, int> mp;
         string temp;
         int n = str.size();
@@ -27,7 +27,7 @@ public:
                     dig += (str[i] - '0');
                     i++;
                 }
-                for (auto& s: mp) {
+                for (auto& s : mp) {
                     s.second *= max(1, dig);
                 }
                 return mp;
@@ -36,8 +36,7 @@ public:
                 int dig = 0;
                 while (i < n && str[i] >= '0' && str[i] <= '9') {
                     dig *= 10;
-                    dig += (str[i] - '0');
-                    i++;
+                    dig += (str[i++] - '0');
                 }
                 mp[temp] += max(1, dig) - 1;
             }
@@ -54,10 +53,8 @@ public:
                 temp.clear();
                 temp += str[i++];
                 while (i < n && str[i] >= 'a' && str[i] <= 'z') {
-                    temp += str[i];
-                    i++;
+                    temp += str[i++];
                 }
-                cout << temp << ' ';
                 mp[temp]++;
             }
         }
