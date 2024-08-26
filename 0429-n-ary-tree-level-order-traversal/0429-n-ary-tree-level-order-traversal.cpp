@@ -33,7 +33,7 @@ public:
                 q.pop();
                 level.push_back(cur->val);
                 for (auto& child : cur->children) {
-                    if (child) q.push(child);
+                   q.push(child);
                 }
             }
             ans.push_back(level);
