@@ -1,17 +1,14 @@
 class Solution {
 public:
     int robotSim(vector<int>& commands, vector<vector<int>>& obstacles) {
-
         set<pair<int, int>> ob;
         for (auto& i : obstacles) {
             ob.insert({i[0], i[1]});
-            ob.insert({i[1], i[0]});
         }
 
         auto haveOb = [&](int x, int y) {
             return (ob.find({x, y}) != ob.end());
         };
-
 
         auto fixDir = [&](int x, char dir) {
             if (x == -1) {
@@ -19,8 +16,7 @@ public:
                 else if (dir == 'r') dir = 'd';
                 else if (dir == 'd') dir = 'l';
                 else if (dir == 'l') dir = 'u';
-            }
-            if (x == -2) {
+            } else if (x == -2) {
                 if (dir == 'u') dir = 'l';
                 else if (dir == 'l') dir = 'd';
                 else if (dir == 'd') dir = 'r';
@@ -29,7 +25,6 @@ public:
             return dir;
         };
 
-        
         auto getMx = [&](int x, int y) {
             return x * x + y * y;
         };
@@ -42,43 +37,42 @@ public:
                 dir = fixDir(i, dir);
                 continue;
             }
-            cout << x << ' ' << y << ' ' << dir << endl;
-            // cout << dir << ' ';
+
+            int cur = i;
             if (dir == 'u') {
-                while (i) {
+                while (cur) {
+                    y++, cur--;
                     if (haveOb(x, y)) {
-                        y--; break;
+                        y--; 
+                        break;
                     }
-                    y++, i--;
-                    mx = max(mx, getMx(x, y));
-                    // cout << mx << ' ';
-                }
-            }
-            if (dir == 'r') {
-                while (i) {
-                    if (haveOb(x, y)) {
-                        x--; break;
-                    }
-                    x++, i--;
-                    mx = max(mx, getMx(x, y));
-                    // cout << mx << ' ';
-                }
-            }
-            if (dir == 'd') {
-                while (i) {
-                    if (haveOb(x, y)) {
-                        y++; break;
-                    }
-                    y--, i--;
                     mx = max(mx, getMx(x, y));
                 }
-            }
-            if (dir == 'l') {
-                while (i) {
+            } else if (dir == 'r') {
+                while (cur) {
+                    x++, cur--;
                     if (haveOb(x, y)) {
-                        x++; break;
+                        x--; 
+                        break;
                     }
-                    x--, i--;
+                    mx = max(mx, getMx(x, y));
+                }
+            } else if (dir == 'd') {
+                while (cur) {
+                    y--, cur--;
+                    if (haveOb(x, y)) {
+                        y++; 
+                        break;
+                    }
+                    mx = max(mx, getMx(x, y));
+                }
+            } else if (dir == 'l') {
+                while (cur) {
+                    x--, cur--;
+                    if (haveOb(x, y)) {
+                        x++; 
+                        break;
+                    }
                     mx = max(mx, getMx(x, y));
                 }
             }
