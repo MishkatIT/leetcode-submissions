@@ -21,23 +21,16 @@
  */
 class Solution {
 public:
-    ListNode* mainHead;
-
     bool isSubPath(ListNode* head, TreeNode* root) {
-        mainHead = head;
-        return solve(root, head); 
+        if (!root) return false; 
+        return dfs(root, head) || isSubPath(head, root->left) || isSubPath(head, root->right);
     }
 
-    bool solve(TreeNode* root, ListNode* head) {
-        if (!head) return true;   
-        if (!root) return false;  
-        
-        if (root->val == head->val) {
-            if (solve(root->left, head->next) || solve(root->right, head->next)) {
-                return true;
-            }
-        }
+    bool dfs(TreeNode* root, ListNode* head) {
+        if (!head) return true;  
+        if (!root) return false;
+        if (root->val != head->val) return false; 
 
-        return solve(root->left, mainHead) || solve(root->right, mainHead);
+        return dfs(root->left, head->next) || dfs(root->right, head->next);
     }
 };
