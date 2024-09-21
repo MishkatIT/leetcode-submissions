@@ -1,33 +1,39 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int n = s.length();
-        int mx = 1;
-        int st = 0, en = 0;
-        for (int x = 0; x < n; x++) {
-            int l = x - 1, r = x + 1;
-            while(l >= 0 && r < n && s[l] == s[r]) {
-                if (r - l + 1 > mx) {
-                    mx = r - l + 1;
-                    st = l, en = r;
-                }
-                l--, r++;
-            }
-            if (x + 1 < n && s[x] == s[x + 1]) {
-                int l = x, r = x + 1;
-                while(l >= 0 && r < n && s[l] == s[r]) {
-                if (r - l + 1 > mx) {
-                    mx = r - l + 1;
-                    st = l, en = r;
-                }
-                l--, r++;
-            }
-            } 
+        return manacher(s);
+    }
+
+    string manacher(string& str) {
+        string t = "#";
+        for (auto& i : str) {
+            t += i;
+            t += "#";
         }
-        string ans;
-        while (st <= en) {
-            ans += s[st++];
+        int n = t.size();
+        vector<int> p(n);
+        int center = 0, right = 0;
+        for (int i = 0; i < n; i++) {
+            int mirror = 2 * center - i;
+            if (i < right) {
+                p[i] = min(p[mirror], right - i);
+            }
+            while (i + p[i] + 1 < n && i - p[i] - 1 >= 0 && t[i + p[i] + 1] == t[i - p[i] - 1]) {
+                p[i]++;
+            }
+            if (p[i] > right) {
+                right = p[i];
+                center = i;
+            }
         }
-        return ans;
+        int mx = 0, c = -1;
+        for (int i = 0; i < n; i++) {
+            if (p[i] > mx) {
+                mx = p[i];
+                c = i;
+            }
+        }
+        int start = (c - mx) / 2;
+        return str.substr(start, mx);
     }
 };
