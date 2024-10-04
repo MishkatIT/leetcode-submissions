@@ -17,6 +17,9 @@ public:
                 have[i]++;
             }
         }
+        for (auto& i : have) {
+            if (i.second > 0) return -1;
+        }
         return ans;
     }
 };
