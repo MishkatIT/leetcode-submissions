@@ -17,7 +17,7 @@ public:
                 s.erase(s.begin());
                 for (auto& v : adj[u]) {
                     if (dis[u] + 1 < dis[v]) {
-                        s.erase({dis[v], v});
+                        // s.erase({dis[v], v});
                         dis[v] = dis[u] + 1;
                         s.insert({dis[v], v});
                     }
