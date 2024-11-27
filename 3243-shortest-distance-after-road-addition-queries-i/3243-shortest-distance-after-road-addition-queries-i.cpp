@@ -8,22 +8,21 @@ public:
 
 
         auto bfs = [&]() -> int {
-            vector<int>dis(n, 1e9);
-            dis[0] = 0;
-            set<pair<int, int>> s; // weight, node
-            s.insert({0, 0});
-            while (!s.empty()) {
-                int u = s.begin()->second;
-                s.erase(s.begin());
+           queue<pair<int, int>> q; // node, dis
+           vector<int> vis(n);
+           q.push({0, 0});
+           vis[0] = true;
+           while (!q.empty()) {
+                int u = q.front().first;
+                int dis = q.front().second;
+                q.pop();
+                if (u == n - 1) return dis;
                 for (auto& v : adj[u]) {
-                    if (dis[u] + 1 < dis[v]) {
-                        // s.erase({dis[v], v});
-                        dis[v] = dis[u] + 1;
-                        s.insert({dis[v], v});
-                    }
+                    if (!vis[v]) q.push({v, dis + 1});
+                    vis[v] = true;
                 }
-            }
-            return dis[n - 1];
+           }
+           return n - 1;
         };
 
         vector<int> ans;
