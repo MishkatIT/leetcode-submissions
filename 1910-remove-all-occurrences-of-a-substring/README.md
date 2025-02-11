@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/remove-all-occurrences-of-a-substring">1910. Remove All Occurrences of a Substring</a></h2><h3>Medium</h3><hr><p>Given two strings <code>s</code> and <code>part</code>, perform the following operation on <code>s</code> until <strong>all</strong> occurrences of the substring <code>part</code> are removed:</p>
+<h2><a href="https://leetcode.com/problems/remove-all-occurrences-of-a-substring/">1910. Remove All Occurrences of a Substring</a></h2><h3>Medium</h3><hr><p>Given two strings <code>s</code> and <code>part</code>, perform the following operation on <code>s</code> until <strong>all</strong> occurrences of the substring <code>part</code> are removed:</p>
 
 <ul>
 	<li>Find the <strong>leftmost</strong> occurrence of the substring <code>part</code> and <strong>remove</strong> it from <code>s</code>.</li>
