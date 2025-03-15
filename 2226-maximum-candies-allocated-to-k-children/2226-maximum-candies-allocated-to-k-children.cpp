@@ -1,12 +1,20 @@
 class Solution {
 public:
-    int maximumCandies(vector<int>& v, long long k) {
-        int l = 1, r = *max_element(v.begin(), v.end()), ans = 0;
-        while (l <= r) {
-            long long mid = (l + r) / 2, cnt = 0;
-            for (auto& i : v) cnt += i / mid;
-            if (cnt >= k) ans = mid, l = mid + 1;
-            else r = mid - 1;
+    int maximumCandies(vector<int>& candies, long long k) {
+        int ans = 0;
+        int low = 1, high = *max_element(candies.begin(), candies.end());
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            long long cnt = 0;
+            for (auto& i : candies) {
+                cnt += i / mid;
+            }
+            if (cnt >= k) {
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
         return ans;
     }
