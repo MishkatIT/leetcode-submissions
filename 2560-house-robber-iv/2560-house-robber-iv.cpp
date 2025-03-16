@@ -1,14 +1,26 @@
 class Solution {
 public:
-    int minCapability(vector<int>& v, int k) {
-        int l = *min_element(v.begin(), v.end()), r = *max_element(v.begin(), v.end()), ans = r;
-        while (l <= r) {
-            int mid = (l + r) / 2, cnt = 0;
-            for (int i = 0; i < v.size(); i++) {
-                if (v[i] <= mid) cnt++, i++;
+    int minCapability(vector<int>& nums, int k) {
+        int ans = -1;
+        int low = *min_element(nums.begin(), nums.end());
+        int high = *max_element(nums.begin(), nums.end());
+        
+        auto ok = [&](int x) {
+            int cnt = 0;
+            for (int i = 0; i < nums.size(); i++) {
+                if (nums[i] <= x) cnt++, i++;
             }
-            if (cnt >= k) ans = mid, r = mid - 1;
-            else l = mid + 1;
+            return cnt >= k;
+        };
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (ok(mid)) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
         }
         return ans;
     }
