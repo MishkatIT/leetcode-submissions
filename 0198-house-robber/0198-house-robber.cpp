@@ -1,18 +1,14 @@
 class Solution {
 public:
-    using ll = long long;
-    vector<int> dp;
-    ll solve (vector<int>& v, int i) {
-        if (i == 0) return v[i];
-        if (i < 0) return 0;
-        if (dp[i] != -1) return dp[i];
-        ll take = v[i] + solve(v, i - 2);
-        ll leave = solve(v, i - 1);
-        return dp[i] =  max(take, leave);
-    }
-
     int rob(vector<int>& nums) {
-        dp.resize(nums.size() + 5, -1);
-        return solve(nums, nums.size() - 1);
+        int n = nums.size();
+        if (n == 1) return nums.front();
+        vector<int> dp(n);
+        dp[0] = nums[0];
+        dp[1] = max(nums[0], nums[1]);
+        for (int i = 2; i < n; i++) {
+            dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);
+        }
+        return dp[n - 1];
     }
 };
