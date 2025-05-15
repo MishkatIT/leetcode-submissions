@@ -1,23 +1,25 @@
 class Solution {
 public:
-    int rob(vector<int>& nums) {
+    int rob(vector<int>& v) {
 
-        int n = nums.size();
-        if (n == 1) return nums.front();
+        if (v.size() == 1) return v.front();
         
-        auto fun = [&](int i, int n) {
-            if (i + 1 == n) return nums[i];
+        auto fun = [](vector<int> v) {
+            int n = v.size();
+            if (n == 1) return v.front();
             vector<int> dp(n);
-            dp[i] = nums[i];
-            dp[i + 1] = max(nums[i], nums[i + 1]);
-            for (int j = i + 2; j < n; j++) {
-                dp[j] = max(dp[j - 1], dp[j - 2] + nums[j]);
+            dp[0] = v[0];
+            dp[1] = max(v[0], v[1]);
+            for (int i = 2; i < n; i++) {
+                dp[i] = max(dp[i - 1], dp[i - 2] + v[i]);
             }
             return dp[n - 1];
         };
 
-        int ans1 = fun(0, n - 1);
-        int ans2 = fun(1, n);
+        vector<int> tempA(v.begin(), v.begin() + v.size() - 1);
+        int ans1 = fun(tempA);
+        vector<int>  tempB(v.begin() + 1, v.end());
+        int ans2 = fun(tempB);
         return max(ans1, ans2);
     }
 };
