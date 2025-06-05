@@ -1,38 +1,35 @@
+class DSU {
+public:
+    vector<int> parent;
+    DSU(int n) {
+        parent.resize(n + 5);
+        iota(parent.begin(), parent.end(), 0);
+    }
+    
+    int root(int x) {
+        return(parent[x] == x ? x : parent[x] = root(parent[x]));
+    }
+
+    void join(int x, int y) {
+        x = root(x);
+        y = root(y);
+        if (x < y) parent[y] = x;
+        else parent[x] = y;
+        return;
+    }
+
+};
+
 class Solution {
 public:
     string smallestEquivalentString(string s1, string s2, string baseStr) {
-        map<char, set<char>> mp;
         int n = s1.size();
+        DSU dsu(26);
         for (int i = 0; i < n; i++) {
-            mp[s1[i]].insert(s2[i]);
-            mp[s2[i]].insert(s1[i]);
-        }
-        map<char, bool> vis;
-        set<char> temp;
-        function<void(char)> dfs = [&](char c) {
-            temp.insert(c);
-            vis[c] = true;
-            for (auto& j : mp[c]) {
-                if (!vis[j]) {
-                    dfs(j);
-                }
-            }
-        };
-        map<char, char> p;
-        for (char c = 'a'; c <= 'z'; c++) {
-            if (!vis[c]) {
-                temp.clear();
-                dfs(c);
-                int x = *temp.begin();
-                temp.erase(temp.begin());
-                p[x] = x;
-                for (auto& i : temp) {
-                    p[i] = x;
-                }
-            }
+            dsu.join(s1[i] - 'a', s2[i] - 'a');
         }
         for (auto& i : baseStr) {
-            i = p[i];
+            i = char(dsu.root(i - 'a') + 'a');
         }
         return baseStr;
     }
