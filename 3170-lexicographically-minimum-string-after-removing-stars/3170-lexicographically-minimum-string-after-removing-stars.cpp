@@ -1,24 +1,26 @@
 class Solution {
 public:
     string clearStars(string s) {
-        map<int, vector<int>> mp;
+        vector<vector<int>> f(26);
         int n = s.size();
-        vector<bool> notTake(n);
+        vector<bool> removed(n);
         for (int i = 0; i < n; i++) {
             if (s[i] == '*') {
-                notTake[i] = true;
-                notTake[mp.begin()->second.back()] = true;
-                mp.begin()->second.pop_back();
-                if (mp.begin()->second.size() == 0) {
-                    mp.erase(mp.begin()->first);
+                removed[i] = true;
+                for (int j = 0; j < 26; j++) {
+                    if (!f[j].empty()) {
+                        removed[f[j].back()] = true;
+                        f[j].pop_back();
+                        break;
+                    }
                 }
             } else {
-                mp[s[i]].push_back(i);
+                f[s[i] - 'a'].push_back(i);
             }
         }
         string ans;
         for (int i = 0; i < n; i++) {
-            if (notTake[i]) continue;
+            if (removed[i]) continue;
             ans += s[i];
         }
         return ans;
