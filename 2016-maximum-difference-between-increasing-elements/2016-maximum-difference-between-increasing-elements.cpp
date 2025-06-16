@@ -11,7 +11,6 @@ public:
             } else if (i > mx) {
                 mx = i;
             }
-            cout << mx << ' ';
             ans = max(ans, mx - mn);
         }
         return ans;
