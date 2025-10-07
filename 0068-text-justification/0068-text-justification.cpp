@@ -12,7 +12,6 @@ public:
                 cnt++;
             }
             space = maxWidth - wordLen;
-            cout << "space  " << space << '\n';
             int even = space / max(1, cnt - 1);
             int extra = space % max(1, cnt - 1);
             string temp;
@@ -28,7 +27,6 @@ public:
                 }
             }
             ans.push_back(temp);
-            i = j;
         }
         string temp = ans.back();
         ans.pop_back();
