@@ -22,7 +22,6 @@ public:
 
         if (!used) {
             for (int j = 0; j < 26; j++) {
-                if (j == cur) continue;
                 int altMask = mask | (1 << j);
                 if (__builtin_popcount(altMask) <= k)
                     mx = max(mx, solve(i + 1, str, k, true, altMask));
