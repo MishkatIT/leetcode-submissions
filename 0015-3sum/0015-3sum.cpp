@@ -3,27 +3,22 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         int n = nums.size();
         sort(nums.begin(), nums.end());
-        set<vector<int>> s;
+        vector<vector<int>> ans;
+        
         for (int i = 0; i < n; i++) {
-            int l = i + 1, r = n - 1;
-            while (l < r) {
-                if (l >= r) break;
-                if (nums[i] + nums[l] + nums[r] > 0) {
-                    r--;
+            if (i > 0 && nums[i] == nums[i - 1]) continue; // skip duplicates
+            
+            unordered_set<int> seen;
+            for (int j = i + 1; j < n; j++) {
+                int need = -nums[i] - nums[j];
+                if (seen.count(need)) {
+                    ans.push_back({nums[i], nums[j], need});
+                    while (j + 1 < n && nums[j] == nums[j + 1]) j++; // skip duplicates
                 }
-                else if (nums[i] + nums[l] + nums[r] < 0) {
-                    l++;
-                } else {
-                    s.insert({nums[i], nums[l], nums[r]});
-                    l++, r--;
-                }
+                seen.insert(nums[j]);
             }
         }
         
-        vector<vector<int>> ans;
-        for (auto& i: s) {
-            ans.push_back(i);
-        }
         return ans;
     }
 };
