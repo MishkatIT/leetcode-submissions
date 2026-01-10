@@ -1,16 +1,29 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        vector<int> fa(26, 0), fb(26, 0);
+        vector<int> f(26);
         for (auto& i : s1) {
-            fa[i - 'a']++;
+            f[i - 'a']++;
         }
-        for (int i = 0; i < s2.size(); i++) {
-            if (i >= s1.size()) {
-                fb[s2[i - s1.size()] - 'a']--;
+        int l = 0, r = 0;
+        int n = s2.size();
+        int tot = s1.size();
+        vector<bool> taken(n);
+        while (r < n) {
+            if (f[s2[r] - 'a'] > 0) {
+                f[s2[r] - 'a']--;
+                taken[r] = true;
+                tot--;
+                r++;
+            } else {
+                if (taken[l]) {
+                    f[s2[l] - 'a']++;
+                    tot++;
+                }
+                l++;
             }
-            fb[s2[i] - 'a']++;
-            if (fa == fb) return true;
+            if (tot == 0) return true;
+            r = max(l, r);
         }
         return false;
     }
