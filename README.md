@@ -16,3 +16,11 @@
     🔗 Visit My LeetCode Profile
   </a>
 </p>
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Database
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [1757-recyclable-and-low-fat-products](https://github.com/MishkatIT/leetcode-submissions/tree/main/1757-recyclable-and-low-fat-products/) | Easy |
+<!---LeetCode Topics End-->
