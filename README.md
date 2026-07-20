@@ -32,4 +32,20 @@
 | [1661-average-time-of-process-per-machine](https://github.com/MishkatIT/leetcode-submissions/tree/main/1661-average-time-of-process-per-machine/) | Easy |
 | [1683-invalid-tweets](https://github.com/MishkatIT/leetcode-submissions/tree/main/1683-invalid-tweets/) | Easy |
 | [1757-recyclable-and-low-fat-products](https://github.com/MishkatIT/leetcode-submissions/tree/main/1757-recyclable-and-low-fat-products/) | Easy |
+## Tree
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0226-invert-binary-tree](https://github.com/MishkatIT/leetcode-submissions/tree/main/0226-invert-binary-tree/) | Easy |
+## Depth-First Search
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0226-invert-binary-tree](https://github.com/MishkatIT/leetcode-submissions/tree/main/0226-invert-binary-tree/) | Easy |
+## Breadth-First Search
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0226-invert-binary-tree](https://github.com/MishkatIT/leetcode-submissions/tree/main/0226-invert-binary-tree/) | Easy |
+## Binary Tree
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0226-invert-binary-tree](https://github.com/MishkatIT/leetcode-submissions/tree/main/0226-invert-binary-tree/) | Easy |
 <!---LeetCode Topics End-->
